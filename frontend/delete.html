@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Donor</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        #message { color: red; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Delete Donor</h1>
+    <label for="donorId">Enter Donor ID:</label>
+    <input type="number" id="donorId" required>
+    <button id="deleteButton">Delete Donor</button>
+    <div id="message"></div>
+
+    <script>
+        document.getElementById('deleteButton').addEventListener('click', function() {
+            const donorId = document.getElementById('donorId').value;
+            if (!donorId) {
+                document.getElementById('message').textContent = 'Please enter a valid donor ID.';
+                return;
+            }
+            deleteDonor(donorId);
+        });
+
+        // Function to delete a donor and their associated blood records
+        function deleteDonor(donorId) {
+            console.log(`Deleting donor with ID: ${donorId}`);
+
+            // First, delete related records in the blood table
+            fetch(`http://localhost:3000/blood/${donorId}`, { method: 'DELETE' })
+                .then(response => {
+                    if (response.ok) {
+                        // If blood records were deleted, proceed to delete the donor
+                        return fetch(`http://localhost:3000/donors/${donorId}`, { method: 'DELETE' });
+                    } else {
+                        throw new Error('Failed to delete related blood records');
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        console.log('Donor deleted successfully');
+                        document.getElementById('message').textContent = 'Donor deleted successfully.';
+                    } else {
+                        throw new Error('Failed to delete donor: ' + response.statusText);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('message').textContent = error.message;
+                });
+        }
+    </script>
+</body>
+</html>

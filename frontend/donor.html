@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donor Management System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    
+        <div class="container">
+            <h1>Join as a Donor!</h1>
+            <form id="donorForm">
+                <input type="text" id="donorName" placeholder="Donor Name" required>
+                <select id="gender" required>
+                    <option value="" disabled selected>Select Gender</option>
+                    <option value="M">Male</option>
+                    <option value="F">Female</option>
+                </select>
+                <input type="date" id="dob" required>
+                <input type="number" id="mobileNumber" placeholder="Mobile Number" required>
+                <input type="text" id="address" placeholder="Address" required>
+                <input type="number" id="weight" placeholder="Weight (kg)" required>
+                <input type="number" id="bloodPressure" placeholder="Blood Pressure" required>
+                <input type="number" id="ironContent" placeholder="Iron Content" required>
+                <input type="text" id="doctorId" placeholder="Doctor ID" required> <!-- Add doctor ID input -->
+                <select id="bloodBankId" required>
+                    <option value="" disabled selected>Select Blood Bank</option>
+                    <!-- Options will be dynamically added here -->
+                </select>
+                <label for="bloodBank">Select Blood Type:</label>
+                <select id="bloodType" required>
+                    <option value="Type1">A+</option>
+                    <option value="Type2">A-</option>
+                    <option value="Type3">B+</option>
+                    <option value="Type4">B-</option>
+                    <option value="Type5">AB+</option>
+                    <option value="Type6">AB-</option>
+                    <option value="Type7">O+</option>
+                    <option value="Type8">O-</option>
+                </select>
+                <button type="submit">Submit</button>
+            </form>
+    
+           
+            <!-- Area to display the Donor ID after registration -->
+        <div id="donorIdDisplay"></div>
+        
+        </div>
+    
+   
+
+    <script src="script.js"></script>
+</body>
+</html>
